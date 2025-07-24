@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+
 @st.cache_resource
 def load_model(path):
     try:
@@ -15,30 +16,30 @@ def load_model(path):
 model = load_model("best_salary_model.pkl")
 
 st.set_page_config(page_title="Employee Salary Predictor", layout="centered")
+
+
 st.markdown("""
 <style>
-body {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #0f172a;
-    color: #e2e8f0;
-    margin: 0;
-    padding: 0;
+/* General padding fix */
+div.block-container {
+    padding-top: 1.5rem;
 }
 
-/* Title */
-h1 {
-    color: blue;
+/* Main Title */
+h2.main-title {
+    color: #007bff;
     text-align: center;
-    font-size: 3em;
+    font-size: 2.2em;
+    margin-bottom: 10px;
 }
 
-/* Section Headings */
-.form-title {
-    font-size: 2em;
+/* Section Titles */
+h2.form-title {
+    font-size: 1.2em;
     font-weight: bold;
-    color: #e2e8f0;
+    color: #3b82f6;
     text-align: center;
-    margin: 10px 0 5px 0;
+    margin: 5px 0;
 }
 
 /* Info Box */
@@ -52,20 +53,14 @@ h1 {
     gap: 5px;
 }
 
-/* Input Form Box */
-.form-box-grid {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-/* Predict Button Center */
+/* Predict Button Wrapper */
 .predict-button-wrapper {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-/* Predict Button Style */
+/* Predict Button */
 button.st-emotion-cache-19rxjzo {
     background-color: #143d75 !important;
     color: white !important;
@@ -77,7 +72,6 @@ button.st-emotion-cache-19rxjzo {
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
-
 button.st-emotion-cache-19rxjzo:hover {
     background-color: #e63946 !important;
 }
@@ -94,55 +88,102 @@ button.st-emotion-cache-19rxjzo:hover {
     text-align: center;
     border: 2px solid #00B386;
 }
-
 .result-box-simple h4 {
     margin-bottom: 10px;
     font-size: 1.1em;
 }
-
-.result-box-simple p {
+.result-box-simple p.salary {
     font-size: 1.8em;
     margin: 0;
     color: #e2e8f0;
 }
-
-/* Responsive Design */
-@media only screen and (max-width: 768px) {
-    h1 {
-        font-size: 2em;
-    }
-
-    .form-title {
-        font-size: 1.5em;
-    }
-
-    .result-box-simple p {
-        font-size: 1.5em;
-    }
-
-    button.st-emotion-cache-19rxjzo {
-        padding: 10px 20px;
-        font-size: 1em;
-    }
+.result-box-simple p.note {
+    margin-top: 10px;
+    font-size: 1em;
+    font-style: italic;
+    color: #a0aec0;
 }
 
-@media only screen and (max-width: 480px) {
-    .form-title {
-        font-size: 1.3em;
-    }
-
-    .result-box-simple {
-        padding: 15px;
-    }
-
-    .result-box-simple p {
-        font-size: 1.3em;
-    }
+/* Footer */
+.footer {
+    margin-top: 60px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
 }
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 8px;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+/* Footer Styling */
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    background-color: transparent;
+    margin-bottom: 0;
+}
+.footer a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 8px;
+}
+.footer a:hover {
+    text-decoration: underline;
+}
+footer, .st-emotion-cache-1avcm0n {
+    display: none;
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+html, body, .main, .block-container {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.block-container {
+    flex: 1 0 auto;
+}
+
+/* Footer Styling */
+.footer {
+    flex-shrink: 0;
+    padding: 16px 0 10px 0;
+    text-align: center;
+    font-size: 17px;
+    color: #fff;  /* White text */
+    line-height: 1.5;
+    background-color: transparent; /* No background color */
+    width: 100%;
+    margin: 0;
+    border-top: none;
+}
+
+/* Hide horizontal line if any */
+hr {
+    display: none;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1>💼 Employee Salary Predictor</h1>", unsafe_allow_html=True)
+st.markdown("<h2 class='main-title'>💼 Employee Salary Predictor</h2>", unsafe_allow_html=True)
+
 st.markdown("""
 <div class="info-box-simple">
 <p>📘 <b>Algorithm Used:</b> Linear Regression</p>
@@ -150,12 +191,12 @@ st.markdown("""
 <p>📊 <b>Evaluation:</b> Compares predicted vs actual salaries.</p>
 </div>
 """, unsafe_allow_html=True)
-st.markdown("<h3 class='form-title'>📝 Enter Employee Details</h3>", unsafe_allow_html=True)
-st.markdown("<div class='form-box-grid'>", unsafe_allow_html=True)
+
+st.markdown("<h2 class='form-title'>📝 Enter Employee Details</h4>", unsafe_allow_html=True)
+
 age = st.number_input("Age", min_value=18, max_value=100, value=30)
 gender = st.selectbox("Gender", ["Male", "Female"])
 degree = st.selectbox("Degree", ["Bachelors", "Masters", "PhD"])
-experience = st.number_input("Years of Experience", min_value=0, max_value=50, value=5)
 
 job_titles = sorted([
     'Software Engineer', 'Data Analyst', 'Senior Manager',
@@ -237,8 +278,13 @@ job_titles = sorted([
        'Junior Financial Advisor', 'Director of Engineering'
 ])
 job_title = st.selectbox("Job Title", job_titles)
+experience = st.number_input("Years of Experience", min_value=0, max_value=50, value=5)
+
 st.markdown("<div class='predict-button-wrapper'>", unsafe_allow_html=True)
-if st.button("Predict Salary"):
+predict = st.button("Predict Salary")
+st.markdown("</div>", unsafe_allow_html=True)
+
+if predict:
     try:
         input_data = pd.DataFrame([{
             "Age": age,
@@ -251,12 +297,23 @@ if st.button("Predict Salary"):
 
         st.markdown(f"""
         <div class="result-box-simple">
-        <h4>💰 Estimated Annual Salary:</h4>
-        <p>₹ {prediction:,.2f}</p>
+            <h4>💰 Estimated Annual Salary:</h4>
+            <p class="salary">₹ {prediction:,.2f}</p>
+            <p class="note">Based on your profile details</p>
         </div>
         """, unsafe_allow_html=True)
 
     except Exception as e:
         st.error(f"Prediction failed: {e}")
-st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("</div>", unsafe_allow_html=True)
+
+st.markdown("<h3 style='color:#007bff; text-align:center;'>📊 Model Evaluation</h3>", unsafe_allow_html=True)
+st.image("model_evaluation.png", caption="Actual vs. Predicted Salary", use_container_width=True)
+
+st.markdown("""
+<div class="footer">
+    Developed by <b>Pavan Putta</b> |
+    <a href="https://www.linkedin.com/in/pavan-putta-84ba3528b/" target="_blank">LinkedIn</a> |
+    <a href="https://github.com/PavanPutta14" target="_blank">GitHub</a>
+</div>
+""", unsafe_allow_html=True)
+
