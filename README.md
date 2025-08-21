@@ -54,15 +54,13 @@ Enter employee details like age, gender, degree, job title, and experience.
 
 ## 📚 Model Info
 
-This project uses a Linear Regression model to predict employee salaries based on input features like age, gender, degree, job title, and years of experience. The model achieves a high accuracy with an R² score of 0.8911, meaning it explains approximately 89% of the variance in salary data.
+This project uses a Linear Regression model to predict employee salaries based on input features like age, gender, degree, job title, and years of experience. The model achieves a strong performance with an R² score of 0.8911, meaning it explains about 89% of the variance in salary data. This high R² value indicates that the model fits the data well and is effective at capturing the relationship between employee characteristics and salary outcomes.
 
-Before training, categorical features (Gender, Degree, and Job Title) were label encoded, and numerical features (Age and Experience) were standardized using StandardScaler. Missing values and duplicate records were also removed during preprocessing.
+Before training, categorical features such as Gender, Degree, and Job Title were label encoded, while numerical features like Age and Experience were standardized using StandardScaler to ensure uniform scaling. In addition, missing values and duplicate records were removed during preprocessing to improve model reliability and accuracy.
 
-Model performance was evaluated using multiple metrics:  
-- Mean Absolute Error (MAE): ₹10,570  
-- Mean Squared Error (MSE): ₹205 million  
-- Root Mean Squared Error (RMSE): ₹14,344  
-These results indicate the model provides reliable salary estimates with reasonable prediction error.
+Overall, the model provides reliable and consistent salary estimates with a relatively low prediction error. Its strong performance makes it suitable for a variety of applications, including salary benchmarking, workforce planning, compensation strategy design, and HR analytics. By leveraging this model, organizations can gain valuable insights into the factors influencing employee pay and make more informed, data-driven decisions.
+
+
 ---
 ### 📁 Project Structure
 ```
